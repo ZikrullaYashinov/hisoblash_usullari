@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
               initialRoute: RouteName.home,
               onGenerateRoute: AppRoutes.generateRoute,
               debugShowCheckedModeBanner: false,
-              title: '',
+              title: 'Hisoblash Usullari',
             ),
           );
         });

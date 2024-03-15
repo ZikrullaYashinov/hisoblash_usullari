@@ -1,4 +1,4 @@
-import 'dart:ffi';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +12,7 @@ import 'package:hisoblash_usullari/util/tools/assistants.dart';
 import 'package:hisoblash_usullari/data/model/equation.dart';
 import 'package:hisoblash_usullari/util/tools/router.dart';
 import 'package:hive/hive.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -39,12 +40,12 @@ class _HomePageState extends State<HomePage> {
     final archiveEquation =
         boxData.get('quadraticEquation') as QuadraticEquation?;
 
-    _controllerA.text = archiveEquation?.a.toString() ?? "";
-    _controllerB.text = archiveEquation?.b.toString() ?? "";
-    _controllerC.text = archiveEquation?.c.toString() ?? "";
-    _controllerMin.text = archiveEquation?.min.toString() ?? "";
-    _controllerMax.text = archiveEquation?.max.toString() ?? "";
-    _controllerError.text = archiveEquation?.error.toString() ?? "";
+    _controllerA.text = archiveEquation?.fun.toString() ?? "x^2-4";
+    _controllerB.text = archiveEquation?.fun1.toString() ?? "2*x";
+    _controllerC.text = archiveEquation?.fun2.toString() ?? "2";
+    _controllerMin.text = archiveEquation?.min.toString() ?? "0";
+    _controllerMax.text = archiveEquation?.max.toString() ?? "5";
+    _controllerError.text = archiveEquation?.error.toString() ?? "0.001";
 
     super.initState();
   }
@@ -53,9 +54,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = minSize(context);
 
-    double a;
-    double b;
-    double c;
     double myMin, myMax;
     double e = 0.001;
 
@@ -79,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Text(
-                              "Kayfitsent a (kvadrat tenglamadagi)",
+                              "Funksiya",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.start,
@@ -102,10 +100,10 @@ class _HomePageState extends State<HomePage> {
                                   horizontal: 12.h, vertical: 4),
                               child: TextField(
                                 controller: _controllerA,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.text,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "a",
+                                  hintText: "f(x)",
                                 ),
                               ),
                             ),
@@ -121,7 +119,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Text(
-                              "Kayfitsent a (kvadrat tenglamadagi)",
+                              "Funksiyaning 1 chi tartipli hosilasi",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.start,
@@ -144,10 +142,10 @@ class _HomePageState extends State<HomePage> {
                                   horizontal: 12.h, vertical: 4),
                               child: TextField(
                                 controller: _controllerB,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.text,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "b",
+                                  hintText: "f'(x)",
                                 ),
                               ),
                             ),
@@ -163,7 +161,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Text(
-                              "Kayfitsent c (kvadrat tenglamadagi)",
+                              "Funksiyaning 2 chi tartipli hosilasi",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.start,
@@ -186,10 +184,10 @@ class _HomePageState extends State<HomePage> {
                                   horizontal: 12.h, vertical: 4),
                               child: TextField(
                                 controller: _controllerC,
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.text,
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
-                                  hintText: "c",
+                                  hintText: "f''(x)",
                                 ),
                               ),
                             ),
@@ -328,14 +326,14 @@ class _HomePageState extends State<HomePage> {
                       child: SimpleButton(
                         onTap: () {
                           try {
-                            a = double.parse(_controllerA.text);
-                            b = double.parse(_controllerB.text);
-                            c = double.parse(_controllerC.text);
                             myMin = double.parse(_controllerMin.text);
                             myMax = double.parse(_controllerMax.text);
                             e = double.parse(_controllerError.text);
-                            var equation =
-                                QuadraticEquation(a, b, c, myMin, myMax, e);
+                            var fun = _controllerA.text;
+                            var fun1 = _controllerB.text;
+                            var fun2 = _controllerC.text;
+                            var equation = QuadraticEquation(
+                                myMin, myMax, e, fun, fun1, fun2);
                             Navigator.of(context).pushNamed(RouteName.result,
                                 arguments: equation);
                             saveDataHive(equation);
