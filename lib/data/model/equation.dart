@@ -60,14 +60,12 @@ class QuadraticEquation {
       double myMax = max;
       double error = this.error;
 
-      double med = 0;
-      double delta = 0;
-      double deltaPercent = 0;
+      double? med;
+      double? delta;
+      double? deltaPercent;
 
       double minY = calculate(myMin);
       double maxY = calculate(myMax);
-
-      var i = 0;
 
       if (maxY * minY < 0) {
         while (true) {
@@ -75,11 +73,12 @@ class QuadraticEquation {
           maxY = calculate(myMax);
 
           double newMed = (myMin + myMax) / 2;
-          delta = absolute(newMed - med);
-          deltaPercent = (1 - med / newMed) * 100;
-
-          if (med == newMed) {
-            return [];
+          if (med != null) {
+            delta = absolute(newMed - med);
+            if (med == newMed) {
+              return [];
+            }
+            deltaPercent = ((newMed - med) / newMed) * 100;
           }
           med = newMed;
 
@@ -89,18 +88,20 @@ class QuadraticEquation {
           } else if (medY * maxY < 0) {
             myMin = med;
           } else {
-            return [med, myMin, myMax, delta, deltaPercent];
+            return [med, myMin, myMax];
           }
-          i++;
-          if (delta < error) {
-            break;
+          if(delta != null) {
+            if (delta < error) {
+              break;
+            }
           }
         }
-        return [med, myMin, myMax, delta, deltaPercent];
+        return [med, myMin, myMax];
       } else {
         return [];
       }
     } catch (e) {
+      print(e);
       return [];
     }
   }
@@ -111,21 +112,24 @@ class QuadraticEquation {
       double myMax = max;
       double error = this.error;
 
-      double delta = 0;
-      double deltaPercent = 0;
+      double delta;
+      double deltaPercent;
 
       double minY = calculate(myMin);
       double maxY = calculate(myMax);
 
-      double dot = 0;
+      double dot;
       double x = 0;
 
       if (maxY * minY < 0) {
-        if (calculate(myMin) * calculate(myMin, derivativeDegree: 2) > 0) {
+        double f_2_min = calculate(myMin, derivativeDegree: 2);
+        double f_2_max = calculate(myMax, derivativeDegree: 2);
+        if (minY * f_2_min > 0) {
           dot = myMin;
-        }
-        if (calculate(myMax) * calculate(myMax, derivativeDegree: 2) > 0) {
+        } else if (maxY * f_2_max > 0) {
           dot = myMax;
+        } else {
+          return [];
         }
         while (true) {
           double f_x = calculate(x);
@@ -143,7 +147,7 @@ class QuadraticEquation {
             break;
           }
         }
-        return [x, delta, deltaPercent];
+        return [x, delta];
       } else {
         return [];
       }
@@ -158,21 +162,24 @@ class QuadraticEquation {
       double myMax = max;
       double error = this.error;
 
-      double delta = 0;
-      double deltaPercent = 0;
+      double delta;
+      double deltaPercent;
 
       double minY = calculate(myMin);
       double maxY = calculate(myMax);
 
-      double dot = 0;
-      double x = 0;
+      double dot;
+      double x;
 
       if (maxY * minY < 0) {
-        if (calculate(myMin) * calculate(myMin, derivativeDegree: 2) > 0) {
+        double f_2_min = calculate(myMin, derivativeDegree: 2);
+        double f_2_max = calculate(myMax, derivativeDegree: 2);
+        if (minY * f_2_min > 0) {
           dot = myMin;
-        }
-        if (calculate(myMax) * calculate(myMax, derivativeDegree: 2) > 0) {
+        } else if (maxY * f_2_max > 0) {
           dot = myMax;
+        } else {
+          return [];
         }
         x = dot;
 
@@ -192,7 +199,7 @@ class QuadraticEquation {
             break;
           }
         }
-        return [x, delta, deltaPercent];
+        return [x, delta];
       } else {
         return [];
       }
@@ -207,21 +214,24 @@ class QuadraticEquation {
       double myMax = max;
       double error = this.error;
 
-      double delta = 0;
-      double deltaPercent = 0;
+      double delta;
+      double deltaPercent;
 
       double minY = calculate(myMin);
       double maxY = calculate(myMax);
 
-      double dot = 0;
-      double x = 0;
+      double dot;
+      double x;
 
       if (maxY * minY < 0) {
-        if (calculate(myMin) * calculate(myMin, derivativeDegree: 2) > 0) {
+        double f_2_min = calculate(myMin, derivativeDegree: 2);
+        double f_2_max = calculate(myMax, derivativeDegree: 2);
+        if (minY * f_2_min > 0) {
           dot = myMin;
-        }
-        if (calculate(myMax) * calculate(myMax, derivativeDegree: 2) > 0) {
+        } else if (maxY * f_2_max > 0) {
           dot = myMax;
+        } else {
+          return [];
         }
         x = dot;
         double f_x_1 = calculate(x, derivativeDegree: 1);
@@ -241,7 +251,7 @@ class QuadraticEquation {
             break;
           }
         }
-        return [x, delta, deltaPercent];
+        return [x, delta];
       } else {
         return [];
       }
