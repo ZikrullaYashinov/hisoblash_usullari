@@ -1,4 +1,5 @@
 import 'package:equations/equations.dart';
+import 'package:hisoblash_usullari/data/model/solution.dart';
 import 'package:hive/hive.dart';
 import 'package:math_expressions/math_expressions.dart';
 
@@ -54,8 +55,9 @@ class QuadraticEquation {
     return calculateText(fun, _x);
   }
 
-  List<double> solutionMethodOfBisectingCrossSection() {
+  List<SolutionData> solutionMethodOfBisectingCrossSection() {
     try {
+      List<SolutionData> solutions = [];
       double myMin = min;
       double myMax = max;
       double error = this.error;
@@ -66,6 +68,8 @@ class QuadraticEquation {
 
       double minY = calculate(myMin);
       double maxY = calculate(myMax);
+
+      int i = 0;
 
       if (maxY * minY < 0) {
         while (true) {
@@ -83,20 +87,22 @@ class QuadraticEquation {
           med = newMed;
 
           double medY = calculate(med);
+          solutions.add(SolutionData(med, i));
           if (medY * minY < 0) {
             myMax = med;
           } else if (medY * maxY < 0) {
             myMin = med;
           } else {
-            return [med, myMin, myMax];
+            return solutions;
           }
-          if(delta != null) {
+          if (delta != null) {
             if (delta < error) {
               break;
             }
           }
+          i++;
         }
-        return [med, myMin, myMax];
+        return solutions;
       } else {
         return [];
       }
@@ -106,8 +112,9 @@ class QuadraticEquation {
     }
   }
 
-  List<double> solutionMethodOfVatars() {
+  List<SolutionData> solutionMethodOfVatars() {
     try {
+      List<SolutionData> solutions = [];
       double myMin = min;
       double myMax = max;
       double error = this.error;
@@ -120,6 +127,7 @@ class QuadraticEquation {
 
       double dot;
       double x = 0;
+      int i = 0;
 
       if (maxY * minY < 0) {
         double f_2_min = calculate(myMin, derivativeDegree: 2);
@@ -142,12 +150,13 @@ class QuadraticEquation {
             deltaPercent = (1 - x2 / x) * 100;
           }
           x = x2;
-
+          solutions.add(SolutionData(x, i));
           if (delta < error) {
             break;
           }
+          i++;
         }
-        return [x, delta];
+        return solutions;
       } else {
         return [];
       }
@@ -156,8 +165,9 @@ class QuadraticEquation {
     }
   }
 
-  List<double> solutionMethodOfUrinma() {
+  List<SolutionData> solutionMethodOfUrinma() {
     try {
+      List<SolutionData> solutions = [];
       double myMin = min;
       double myMax = max;
       double error = this.error;
@@ -170,6 +180,7 @@ class QuadraticEquation {
 
       double dot;
       double x;
+      int i = 0;
 
       if (maxY * minY < 0) {
         double f_2_min = calculate(myMin, derivativeDegree: 2);
@@ -195,11 +206,13 @@ class QuadraticEquation {
           }
           x = x2;
 
+          solutions.add(SolutionData(x, i));
           if (delta < error) {
             break;
           }
+          i++;
         }
-        return [x, delta];
+        return solutions;
       } else {
         return [];
       }
@@ -208,8 +221,9 @@ class QuadraticEquation {
     }
   }
 
-  List<double> solutionMethodOfUrinmaModifikatsiya() {
+  List<SolutionData> solutionMethodOfUrinmaModifikatsiya() {
     try {
+      List<SolutionData> solutions = [];
       double myMin = min;
       double myMax = max;
       double error = this.error;
@@ -222,6 +236,7 @@ class QuadraticEquation {
 
       double dot;
       double x;
+      int i = 0;
 
       if (maxY * minY < 0) {
         double f_2_min = calculate(myMin, derivativeDegree: 2);
@@ -246,12 +261,14 @@ class QuadraticEquation {
             deltaPercent = (1 - x / x2) * 100;
           }
           x = x2;
+          solutions.add(SolutionData(x, i));
 
           if (delta < error) {
             break;
           }
+          i++;
         }
-        return [x, delta];
+        return solutions;
       } else {
         return [];
       }

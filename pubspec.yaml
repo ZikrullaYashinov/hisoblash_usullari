@@ -25,6 +25,7 @@ dependencies:
 
   math_expressions: ^2.4.0
   equations: ^5.0.2
+  syncfusion_flutter_charts: ^25.1.35
 
 
 dev_dependencies:
