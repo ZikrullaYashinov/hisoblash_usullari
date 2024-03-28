@@ -2,7 +2,7 @@ name: hisoblash_usullari
 description: "A new Flutter project."
 publish_to: 'none'
 
-version: 1.0.1+2
+version: 1.0.2+3
 
 environment:
   sdk: '>=3.2.3 <4.0.0'
@@ -26,7 +26,7 @@ dependencies:
   math_expressions: ^2.4.0
   equations: ^5.0.2
   syncfusion_flutter_charts: ^25.1.35
-
+  fl_chart: ^0.66.2
 
 dev_dependencies:
   flutter_test:

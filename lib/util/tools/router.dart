@@ -1,4 +1,6 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:hisoblash_usullari/ui/graphic/ui/graphic_page.dart';
 import 'package:hisoblash_usullari/ui/home/ui/home_page.dart';
 import 'package:hisoblash_usullari/ui/info/ui/info_page.dart';
 import 'package:hisoblash_usullari/ui/result/ui/result_page.dart';
@@ -8,6 +10,7 @@ abstract class RouteName {
   static const home = '/home';
   static const result = '/result';
   static const info = '/info';
+  static const graphic = '/graphic';
 }
 
 class AppRoutes {
@@ -22,6 +25,9 @@ class AppRoutes {
       case RouteName.info:
         return MaterialPageRoute(
             builder: (context) => const InfoPage());
+      case RouteName.graphic:
+        return MaterialPageRoute(
+            builder: (context) => GraphicPage(quadraticEquation: args as QuadraticEquation,));
       default:
         return null;
     }

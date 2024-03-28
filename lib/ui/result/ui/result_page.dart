@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:hisoblash_usullari/data/model/solution.dart';
 import 'package:hisoblash_usullari/ui/widget/item_result.dart';
 import 'package:hisoblash_usullari/data/model/equation.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../widget/global_app_bar.dart';
 
 class ResultPage extends StatefulWidget {
-  ResultPage(this.quadraticEquation, {super.key});
+  const ResultPage(this.quadraticEquation, {super.key});
 
-  QuadraticEquation quadraticEquation;
+  final QuadraticEquation quadraticEquation;
 
   @override
   State<ResultPage> createState() => _ResultPageState();
 }
 
 class _ResultPageState extends State<ResultPage> {
+
   @override
   Widget build(BuildContext context) {
     var solution1 =
@@ -39,7 +37,7 @@ class _ResultPageState extends State<ResultPage> {
                 child: Column(
                   children: [
                     ItemResult(
-                      "Kesmani teng ikkiga bo'ish usuli yordamida",
+                      "Kesmani teng ikkiga bo'lish usuli yordamida",
                       "${solution1.isEmpty ? "Yechim yo'q" : solution1.last.x}",
                       solutions: solution1.isNotEmpty ? solution1 : null,
                     ),
@@ -67,11 +65,4 @@ class _ResultPageState extends State<ResultPage> {
       ),
     );
   }
-}
-
-class SalesData {
-  SalesData(this.x, this.i);
-
-  final double x;
-  final int i;
 }

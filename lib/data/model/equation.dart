@@ -1,4 +1,5 @@
 import 'package:equations/equations.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:hisoblash_usullari/data/model/solution.dart';
 import 'package:hive/hive.dart';
 import 'package:math_expressions/math_expressions.dart';
@@ -17,6 +18,8 @@ class QuadraticEquation {
   double max;
   @HiveField(5)
   double error;
+
+  final int _errorMaxIteration = 10000;
 
   QuadraticEquation(
     this.min,
@@ -53,6 +56,22 @@ class QuadraticEquation {
       return calculateText(fun2, _x);
     }
     return calculateText(fun, _x);
+  }
+
+  List<FlSpot> getSpots({double? intervalMin, double? intervalMax}) {
+    intervalMin = intervalMin ?? min;
+    intervalMax = intervalMax ?? max;
+    List<FlSpot> spots = [];
+    print("min $intervalMin");
+    print("max $intervalMax");
+    for (var i = intervalMin.toInt(); i < intervalMax.toInt(); i++) {
+      try {
+        spots.add(FlSpot(i.toDouble(), calculate(i.toDouble())));
+      } catch (e) {
+        print(e);
+      }
+    }
+    return spots;
   }
 
   List<SolutionData> solutionMethodOfBisectingCrossSection() {
@@ -101,6 +120,9 @@ class QuadraticEquation {
             }
           }
           i++;
+          if (i > _errorMaxIteration) {
+            return [];
+          }
         }
         return solutions;
       } else {
@@ -155,6 +177,9 @@ class QuadraticEquation {
             break;
           }
           i++;
+          if (i > _errorMaxIteration) {
+            return [];
+          }
         }
         return solutions;
       } else {
@@ -211,6 +236,9 @@ class QuadraticEquation {
             break;
           }
           i++;
+          if (i > _errorMaxIteration) {
+            return [];
+          }
         }
         return solutions;
       } else {
@@ -267,6 +295,9 @@ class QuadraticEquation {
             break;
           }
           i++;
+          if (i > _errorMaxIteration) {
+            return [];
+          }
         }
         return solutions;
       } else {

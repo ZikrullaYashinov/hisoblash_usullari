@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,19 +6,22 @@ import '../../util/constants/app_colors.dart';
 import '../../util/tools/assistants.dart';
 
 class GlobalAppBar extends StatelessWidget {
-  GlobalAppBar(
-      {required this.name,
-      this.onTap,
-      this.icon = const Icon(Icons.menu),
-      this.iconChild,
-      this.rightImageUrl,
-      super.key});
+  const GlobalAppBar({
+    required this.name,
+    this.onTap,
+    this.icon = const Icon(Icons.menu),
+    this.iconChild,
+    this.right,
+    this.rightTap,
+    super.key,
+  });
 
-  String name;
-  VoidCallback? onTap;
-  Icon icon;
-  Widget? iconChild;
-  String? rightImageUrl;
+  final String name;
+  final VoidCallback? onTap;
+  final Icon icon;
+  final Widget? iconChild;
+  final Icon? right;
+  final VoidCallback? rightTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class GlobalAppBar extends StatelessWidget {
       child: DecoratedBox(
         decoration: const BoxDecoration(color: AppColors.orangeDark),
         child: Row(
-          mainAxisAlignment: rightImageUrl == null
+          mainAxisAlignment: right == null
               ? MainAxisAlignment.start
               : MainAxisAlignment.spaceBetween,
           children: [
@@ -58,19 +60,10 @@ class GlobalAppBar extends StatelessWidget {
                 ),
               ),
             ),
-            if (rightImageUrl != null)
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.h),
-                child: SizedBox(
-                  height: size * 0.12,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.h),
-                    child: Image.network(
-                      rightImageUrl!,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+            if (right != null)
+              IconButton(
+                onPressed: rightTap,
+                icon: right!,
               ),
           ],
         ),

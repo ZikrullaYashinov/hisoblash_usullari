@@ -1,21 +1,16 @@
-import 'dart:math' as math;
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hisoblash_usullari/app/app.dart';
 import 'package:hisoblash_usullari/ui/widget/global_app_bar.dart';
 import 'package:hisoblash_usullari/ui/widget/simple_button.dart';
-import 'package:hisoblash_usullari/ui/widget/text_field.dart';
 import 'package:hisoblash_usullari/util/constants/app_colors.dart';
 import 'package:hisoblash_usullari/util/tools/assistants.dart';
 import 'package:hisoblash_usullari/data/model/equation.dart';
 import 'package:hisoblash_usullari/util/tools/router.dart';
 import 'package:hive/hive.dart';
-import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -54,9 +49,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final size = minSize(context);
 
-    double myMin, myMax;
-    double e = 0.001;
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -64,6 +56,13 @@ class _HomePageState extends State<HomePage> {
             GlobalAppBar(
               name: "Hisoblash Usullari",
               onTap: () => Navigator.of(context).pushNamed(RouteName.info),
+              right: const Icon(
+                Icons.auto_graph,
+                color: AppColors.white,
+              ),
+              rightTap: () {
+                _input(isResult: false);
+              },
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -119,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Text(
-                              "Funksiyaning 1 chi tartipli hosilasi",
+                              "Funksiyaning 1 chi tartibli hosilasi",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.start,
@@ -161,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 12.h),
                             child: Text(
-                              "Funksiyaning 2 chi tartipli hosilasi",
+                              "Funksiyaning 2 chi tartibli hosilasi",
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.start,
@@ -325,25 +324,7 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.all(8.h),
                       child: SimpleButton(
                         onTap: () {
-                          try {
-                            myMin = double.parse(_controllerMin.text);
-                            myMax = double.parse(_controllerMax.text);
-                            e = double.parse(_controllerError.text);
-                            var fun = _controllerA.text;
-                            var fun1 = _controllerB.text;
-                            var fun2 = _controllerC.text;
-                            var equation = QuadraticEquation(
-                                myMin, myMax, e, fun, fun1, fun2);
-                            Navigator.of(context).pushNamed(RouteName.result,
-                                arguments: equation);
-                            saveDataHive(equation);
-                          } catch (e) {
-                            print(e);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        "Iltimos kiruvchi parametrlarni tekshiring")));
-                          }
+                          _input();
                         },
                         text: "Hisoblash",
                         height: size * 0.15,
@@ -358,5 +339,29 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  void _input({bool isResult = true}) {
+    double myMin, myMax;
+    double e = 0.001;
+    try {
+      myMin = double.parse(_controllerMin.text);
+      myMax = double.parse(_controllerMax.text);
+      e = double.parse(_controllerError.text);
+      var fun = _controllerA.text;
+      var fun1 = _controllerB.text;
+      var fun2 = _controllerC.text;
+      var equation = QuadraticEquation(myMin, myMax, e, fun, fun1, fun2);
+      if (isResult) {
+        Navigator.of(context).pushNamed(RouteName.result, arguments: equation);
+      } else {
+        Navigator.of(context).pushNamed(RouteName.graphic, arguments: equation);
+      }
+      saveDataHive(equation);
+    } catch (e) {
+      print(e);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Iltimos kiruvchi parametrlarni tekshiring")));
+    }
   }
 }
