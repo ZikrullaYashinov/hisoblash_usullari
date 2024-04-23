@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,7 +6,6 @@ import 'package:hisoblash_usullari/data/model/equation.dart';
 import 'package:hisoblash_usullari/util/tools/assistants.dart';
 
 import '../../../util/constants/app_colors.dart';
-import '../../../util/tools/router.dart';
 import '../../widget/global_app_bar.dart';
 
 class GraphicPage extends StatefulWidget {
@@ -39,8 +36,8 @@ class _GraphicPageState extends State<GraphicPage> {
 
   @override
   Widget build(BuildContext context) {
-    spots =
-        widget.quadraticEquation.getSpots();
+    spots = widget.quadraticEquation.getSpots();
+    var size = minSize(context);
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
@@ -157,8 +154,8 @@ class _GraphicPageState extends State<GraphicPage> {
                       ),
                     ),
                     SizedBox(
-                      height: width(context),
-                      width: width(context),
+                      height: size * 0.8,
+                      width: size * 0.8,
                       child: spots.isNotEmpty ? Graphic() : const SizedBox(),
                     ),
                   ],
@@ -172,7 +169,6 @@ class _GraphicPageState extends State<GraphicPage> {
   }
 
   Widget Graphic() {
-    print("Graphic min $min, max $max");
     return LineChart(
       LineChartData(
         borderData: FlBorderData(
@@ -199,15 +195,15 @@ class _GraphicPageState extends State<GraphicPage> {
         lineBarsData: [
           LineChartBarData(
             spots: spots,
-            // [
-            //   const FlSpot(-2, 2),
-            //   const FlSpot(-1, -2),
-            //   const FlSpot(0, 0),
-            //   const FlSpot(1, 2),
-            //   const FlSpot(2, -1),
-            //   const FlSpot(3, 3),
-            //   const FlSpot(9, 8),
-            // ],
+            isCurved: true,
+            barWidth: 3,
+          ),
+          LineChartBarData(
+            spots: [
+              FlSpot(min, 0),
+              FlSpot(max, 0),
+            ],
+            color: AppColors.redError,
             isCurved: true,
             barWidth: 3,
           ),

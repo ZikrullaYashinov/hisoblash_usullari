@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             GlobalAppBar(
-              name: "Hisoblash Usullari",
+              name: "Taqribiy yechish",
               onTap: () => Navigator.of(context).pushNamed(RouteName.info),
               right: const Icon(
                 Icons.auto_graph,

@@ -68,19 +68,6 @@ class InfoPage extends StatelessWidget {
                               Padding(
                                 padding: EdgeInsets.all(4.h),
                                 child: Text(
-                                  "Ustoz: Karimov Umid",
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                        fontSize: 16,
-                                        color: AppColors.black,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.all(4.h),
-                                child: Text(
                                   "Ishlab chiqdi: Urganch Davlat Universiteti 211-amaliy matematika o'quvchisi Yashinov Zikrulla",
                                   textAlign: TextAlign.start,
                                   style: GoogleFonts.inter(
@@ -147,3 +134,103 @@ class InfoPage extends StatelessWidget {
     );
   }
 }
+
+// SizedBox(
+// width: min,
+// height: min,
+// child: Column(
+// mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+// crossAxisAlignment: CrossAxisAlignment.center,
+// children: [
+// Padding(
+// padding: EdgeInsets.all(8.h),
+// child: Column(
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Padding(
+// padding: EdgeInsets.symmetric(horizontal: 12.h),
+// child: Text(
+// "min",
+// maxLines: 1,
+// overflow: TextOverflow.ellipsis,
+// textAlign: TextAlign.start,
+// style: GoogleFonts.inter(
+// textStyle: const TextStyle(
+// fontSize: 12,
+// color: AppColors.black,
+// fontWeight: FontWeight.w500),
+// ),
+// ),
+// ),
+// DecoratedBox(
+// decoration: BoxDecoration(
+// color: AppColors.grayLight3,
+// borderRadius:
+// BorderRadius.all(Radius.circular(8.h)),
+// ),
+// child: Padding(
+// padding: EdgeInsets.symmetric(
+// horizontal: 12.h, vertical: 4),
+// child: TextField(
+// controller: _controllerA,
+// keyboardType: TextInputType.number,
+// decoration: const InputDecoration(
+// border: InputBorder.none,
+// hintText: "min",
+// ),
+// ),
+// ),
+// ),
+// ],
+// ),
+// ),
+// Padding(
+// padding: EdgeInsets.all(8.h),
+// child: Column(
+// crossAxisAlignment: CrossAxisAlignment.start,
+// children: [
+// Padding(
+// padding: EdgeInsets.symmetric(horizontal: 12.h),
+// child: Text(
+// "max",
+// maxLines: 1,
+// overflow: TextOverflow.ellipsis,
+// textAlign: TextAlign.start,
+// style: GoogleFonts.inter(
+// textStyle: const TextStyle(
+// fontSize: 12,
+// color: AppColors.black,
+// fontWeight: FontWeight.w500),
+// ),
+// ),
+// ),
+// DecoratedBox(
+// decoration: BoxDecoration(
+// color: AppColors.grayLight3,
+// borderRadius:
+// BorderRadius.all(Radius.circular(8.h)),
+// ),
+// child: Padding(
+// padding: EdgeInsets.symmetric(
+// horizontal: 12.h, vertical: 4),
+// child: TextField(
+// controller: _controllerB,
+// keyboardType: TextInputType.number,
+// decoration: const InputDecoration(
+// border: InputBorder.none,
+// hintText: "max",
+// ),
+// ),
+// ),
+// ),
+// ],
+// ),
+// ),
+// SizedBox(
+// height: width(context),
+// width: width(context),
+// child: spots.isNotEmpty ? Graphic() : const SizedBox(),
+// ),
+// ],
+// ),
+// ),
