@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hisoblash_usullari/ui/widget/sm_button.dart';
 import 'package:hisoblash_usullari/util/constants/app_images.dart';
-import 'package:hisoblash_usullari/util/tools/router.dart';
 
 import '../../../util/constants/app_colors.dart';
 import '../../widget/global_app_bar.dart';
@@ -69,6 +68,19 @@ class InfoPage extends StatelessWidget {
                                 padding: EdgeInsets.all(4.h),
                                 child: Text(
                                   "Ishlab chiqdi: Urganch Davlat Universiteti 211-amaliy matematika o'quvchisi Yashinov Zikrulla",
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.inter(
+                                    textStyle: const TextStyle(
+                                        fontSize: 16,
+                                        color: AppColors.black,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(4.h),
+                                child: Text(
+                                  "Ishlab chiqilgan yil: 2024",
                                   textAlign: TextAlign.start,
                                   style: GoogleFonts.inter(
                                     textStyle: const TextStyle(
