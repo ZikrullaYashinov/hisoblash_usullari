@@ -61,10 +61,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['hisoblash_usullari']
-            keyPassword keystoreProperties['Hamdam173*']
+            keyAlias 'hisoblash_usullari'
+            keyPassword 'Hamdam173*'
             storeFile file('hisoblash_usullari.keystore')
-            storePassword keystoreProperties['Hamdam173*']
+            storePassword 'Hamdam173*'
         }
     }
     buildTypes {
