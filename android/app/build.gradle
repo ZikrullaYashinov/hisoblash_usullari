@@ -63,7 +63,7 @@ android {
         release {
             keyAlias 'hisoblash_usullari'
             keyPassword 'Hamdam173*'
-            storeFile file('hisoblash_usullari.keystore')
+            storeFile file('hisoblash_usullari.jks')
             storePassword 'Hamdam173*'
         }
     }
