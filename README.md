@@ -14,6 +14,10 @@
 ## Features
 
 - **Solve equation** - Solve equation by calculation methods. With the four methods below
+- **1.** - The method of dividing the section into two equal parts
+- **2.** - Vatar method
+- **3.** - Method of attempts
+- **4.** - Method of attempts (modification)
 
 ## Installation
 
