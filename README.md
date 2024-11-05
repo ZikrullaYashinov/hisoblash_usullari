@@ -3,7 +3,7 @@
   <img src="./screen2.png" alt="App Screenshot" width="200" height="444"/>
 </p>
 
-<a href="https://play.google.com/store/apps/details?id=your.app.package" target="_blank">
+<a href="https://play.google.com/store/apps/details?id=zikrulla.production.hisoblash_usullari.hisoblash_usullari" target="_blank">
   <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Download on Google Play" width="200"/>
 </a>
 
