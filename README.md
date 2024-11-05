@@ -1,16 +1,36 @@
-# hisoblash_usullari
+<p float="left">
+  <img src="./screen1.jpg" alt="App Screenshot" width="200" height="444"/>
+  <img src="./screen2.jpg" alt="App Screenshot" width="200" height="444"/>
+</p>
 
-A new Flutter project.
+# Hisoblash Usullari
 
-## Getting Started
+"Hisoblash Usullari" is an application for [for solve the equations].
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- **Solve equation** - Solve equation by calculation methods. With the four methods below
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To clone this repository, use the following command:
+
+```bash
+git clone https://github.com/ZikrullaYashinov/hisoblash_usullari
+```
+
+# Hisoblash Usullari
+
+"Hisoblash Usullari" - bu ilova [tenglamalarni yechish uchun].
+
+## Xususiyatlar
+
+- **Tenglamalarni yechish** - Tenglamalarni hisoblash usullari bilan yechadi. Quyidagi to'rt xil usul bilan
+
+## O'rnatish
+
+Loyihani klonlab olish uchun quyidagi buyruqdan foydalaning:
+
+```bash
+git clone https://github.com/ZikrullaYashinov/hisoblash_usullari
+```
