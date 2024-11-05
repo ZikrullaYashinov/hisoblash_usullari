@@ -34,6 +34,10 @@ git clone https://github.com/ZikrullaYashinov/hisoblash_usullari
 ## Xususiyatlar
 
 - **Tenglamalarni yechish** - Tenglamalarni hisoblash usullari bilan yechadi. Quyidagi to'rt xil usul bilan
+  1. Kesimni ikkita teng qismga bo'lish usuli
+  2. Vatar usuli
+  3. Urinishlar usuli
+  4. Urinishlar usuli (modifikatsiya)
 
 ## O'rnatish
 
